@@ -32,11 +32,11 @@ Route::controller(AuthController::class)->prefix('v1')->group(function () {
 
 Route::apiResource('/postcodes', LocationController::class);
 
-Route::controller(LocationController::class)->group(function () {
-
-    Route::get('list/postcodes',  'allpostcodes');
-
-    Route::post('specific/postcode',  'queryPostcode');
+Route::middleware('auth.postcode')->prefix('v1')->group(function () {
+    Route::controller(LocationController::class)->group(function () {
+        Route::get('list/postcodes',  'allpostcodes');
+        Route::post('postcodes','queryPostcode');
+    });
 });
 
 

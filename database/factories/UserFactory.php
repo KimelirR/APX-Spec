@@ -17,11 +17,14 @@ class UserFactory extends Factory
      */
     public function definition(): array
     {
+        $api_key = bin2hex(random_bytes(32));
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'api_key'  => $api_key,
+            'status'  => fake()->randomElement(['active', 'inactive']),
             'remember_token' => Str::random(10),
         ];
     }

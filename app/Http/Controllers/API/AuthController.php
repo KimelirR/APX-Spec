@@ -23,10 +23,10 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
-
+        $api_key = bin2hex(random_bytes(32));
         $token = $user->createToken('main')->plainTextToken;
         // return response(compact('user', 'token'));
-        return Response(compact('user','token'),HttpResponse::HTTP_ACCEPTED);
+        return Response(compact('user','token','api_key'),HttpResponse::HTTP_ACCEPTED);
     }
 
     public function login(LoginRequest $request)

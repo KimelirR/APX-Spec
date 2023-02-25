@@ -16,11 +16,13 @@ class LocationFactory extends Factory
      */
     public function definition(): array
     {
+        $api_key = bin2hex(random_bytes(32));
         return [
-            'Postcode' => fake()->postcode(),
-            'Street_Address' => fake()->streetAddress(),
-            'Lat' => fake()->latitude(),
-            'Long' => fake()->longitude(),
+            // 'Postcode' => fake()->postcode(),
+            // 'Street_Address' => fake()->streetAddress(),
+            // 'Lat' => fake()->latitude(),
+            // 'Long' => fake()->longitude(),
+            'api_key'  => $api_key,
         ];
     }
 }

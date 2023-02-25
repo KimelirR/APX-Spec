@@ -15,10 +15,12 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
+        $api_key = bin2hex(random_bytes(32));
         User::create([
             'name' => 'admin',
             'email_verified_at' => now(),
 			'password' => Hash::make('adminlaravel@2023'),
+            'api_key' => $api_key,
             'email' => 'admin@laravel.com',
             'remember_token' => Str::random(10),
         ]);

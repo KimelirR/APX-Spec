@@ -34,35 +34,22 @@ class LocationController extends Controller
 
     public function queryPostcode(request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'Postcode' => 'required|string'
-        ]);
-
-        if ($validator->fails())
-        {
-           $errors = implode(" ", $validator->errors()->all());
-           $response =['status' => 'error', 'message' => $errors];
-           return response()->json($response,400);
-        }
-        else
-        {
-            $Postcode = $request->input('Postcode');
+            $postcode = $request->input('postcode');
 
             $location = DB::table('locations')
-                    ->select('id','Postcode','Street_Address','Lat','Lat')
-                    ->where('Postcode', '=', $Postcode)
+                    ->select('ID','Postcode','Street_Address','Lat','Long')
+                    ->where('Postcode', '=', $postcode)
                     ->whereNotNull('Postcode')
                     ->get();
 
             if(sizeof($location) == 0){
-                $response =['status' => 'error', 'message' => 'Not Found'];
+                $response =['status' => 'Not Found! Check your Postcode and try again', 'message' => 'Not Found'];
                 return response()->json($response,404);
             }
             else{
-                return response()->json($location,200);
+                $response =['status' => 'success', 'locations' => $location];
+                return response()->json($response,200);
             }
-
-        }
     }
 
 
@@ -106,3 +93,7 @@ class LocationController extends Controller
         return response()->json([""=>""],204);
     }
 }
+
+// $token = bin2hex(random_bytes(32));
+//                 $response =['token' => $token];
+//                 return response()->json($response,404);

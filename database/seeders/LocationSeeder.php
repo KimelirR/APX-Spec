@@ -13,6 +13,6 @@ class LocationSeeder extends Seeder
      */
     public function run(): void
     {
-        Location::factory()->times(40)->create();
+        Location::factory()->create();
     }
 }

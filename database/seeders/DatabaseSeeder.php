@@ -16,10 +16,10 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
          $this->call([
-             UserSeeder::class,
+            //  UserSeeder::class,
              UsersTableSeeder::class,
-             LocationcreateSeeder::class,
-             LocationSeeder::class,
+            //  LocationcreateSeeder::class,
+            //  LocationSeeder::class,
          ]);
     }
 }

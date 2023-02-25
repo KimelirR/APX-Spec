@@ -94,6 +94,3 @@ class LocationController extends Controller
     }
 }
 
-// $token = bin2hex(random_bytes(32));
-//                 $response =['token' => $token];
-//                 return response()->json($response,404);

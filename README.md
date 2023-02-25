@@ -1,69 +1,81 @@
-# Installation
+# APX-SPEC
 
-## Requirements
+## Installation
 
-* PHP 8.1
-* Composer Installed
-* A running Laravel app
-
-### Install Via
+* clone this project into your machine
+ 
+* Install project dependencies
 
   ```php
-    composer require darkaonline/l5-swagger 
+   composer install
   ```
-  
-* Once its installed you need to publish in your application
-  
-  ```php
-    php artisan vendor:publish --provider "L5Swagger\L5SwaggerServiceProvider"
+
+  ```javascript
+    npm install
   ```
-  
-### Since we need to perform Tests and perform our documentaion live we need to edit out .env file to be able to view documentation server on laravel on localhost
 
-   ```php
-   L5_SWAGGER_CONST_HOST="http://localhost:8000"
-   ```
+* Create .env file through copy
+  ```
+    cp .env.example .env
+  ```
+ 
+* Provide database credentials below in .env file.
+  ```
+     DB_DATABASE=?
+     DB_USERNAME=?
+     DB_PASSWORD=?
+  ```
 
-### Lets understand the basics on this Swagger terms first
+* Run migrations 
+    ```php
+    php artisan migrate --seed
+    ```
 
-* Info – add information about a whole project;
-* Tag – create a tag for separating endpoints by sections;
-* Get – describe GET request;
-* Post – describe POST request;
-* Delete – describe DELETE request;
-* Post – describe POST request;
-* Put – describe PUT request;
-* Response – describe a response;
-* Schema – describe JSON properties or property parameters, which can be reused in other schemas;
-* Property – describe a field;
-* Items – describe elements of the array;
-
-## How can we use Swagger on our Laravel project
-
-1. Add Project Info - This will describe our goal on project.
-
-Before generating your first documentation, you should add project info in the @Info annotation.In app/Http/Controllers/Controller.php class to do this. For example:
-
-```php
-    /**
-    @OA\Info(
-        description="This is an example API",
-        version="1.0.0",
-        title="Example API"
-    )
-    */
+* Generate key for laravel new application you have installed.
+    ```php
+    php artisan key:generate && php artisan config:cache
+    ```
     
-    class Controller extends BaseController
-    {
-        //.....
-    }
-```
+* Insert Manually into locations table for example
+        ```sql
+        INSERT INTO `Location_Table` (`ID`, `Timestamp`, `Postcode`, `Street_Address`, `Lat`, `Long`) VALUES
+(153830321, '2021-02-24 22:48:15', 'TA165QQ', '54 BROADWAY </a><br>', '50.9081422', '-2.7966312');
+        ```
+    
+> Congratulations you have installed laravel app successfully!
 
-['https://haait.net/how-to-use-swagger-in-laravel/']
-
-['https://swagger.io/specification/']
-[('https://blog.quickadminpanel.com/laravel-api-documentation-with-openapiswagger/')]
-
+## Start Our application
 
 
+* __*On terminal split into two*__
 
+* First one || Start our laravel app
+
+            ```php
+            php artisan server
+            ```
+* Second One || Run vite 
+
+            ```php
+            npm run build
+            ```
+
+## On Browser
+   http://127.0.0.1:8000
+   Then test
+   
+<!--    
+## Postman configuration
+
+  * Our post api endpoint [http://127.0.0.1:8000/api/v1/postcodes]
+
+  * Set the __headers__ as following
+
+    ![alt text](https://github.com/KimelirR/AfricasTalking-laravel-sms/blob/master/public/images/screenshot1.png?raw=true)
+
+  * Set the __body__ this way...Url_encoded
+
+    ![alt text](https://github.com/KimelirR/AfricasTalking-laravel-sms/blob/master/public/images/screenshot2.png?raw=true)
+
+> ! Lastly send messages. The end
+ -->

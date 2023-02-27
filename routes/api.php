@@ -39,14 +39,12 @@ Route::middleware('auth.postcode')->prefix('v1')->group(function () {
     });
 });
 
-
-
-
-
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
+## Check api key before rendering Anything
+Route::middleware('check.api_key')->prefix('v1')->group(function () {
+    Route::controller(LocationController::class)->group(function () {
+        Route::get('postcodes/{postcode}','specificLocation');
+    });
+});
 
 
 

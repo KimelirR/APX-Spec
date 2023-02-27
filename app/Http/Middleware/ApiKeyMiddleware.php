@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
-class PostcodeMiddleware
+class ApiKeyMiddleware
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,6 @@ class PostcodeMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         $validator = Validator::make($request->all(), [
-            'postcode' => 'required|string',
             'api_key' => 'required|string'
         ]);
 
@@ -31,7 +30,6 @@ class PostcodeMiddleware
         else
         {
             $api_key = $request->input('api_key');
-            $postcode = $request->input('postcode');
 
             $location = DB::table('users')
                     ->select('api_key')

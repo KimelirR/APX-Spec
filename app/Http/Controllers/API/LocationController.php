@@ -52,6 +52,24 @@ class LocationController extends Controller
             }
     }
 
+    public function specificLocation(string $postcode)
+    {
+            $location = DB::table('locations')
+                    ->select('ID','Postcode','Street_Address','Lat','Long')
+                    ->where('Postcode', '=', $postcode)
+                    ->whereNotNull('Postcode')
+                    ->get();
+
+            if(sizeof($location) == 0){
+                $response =['status' => 'Not Found! Check your Postcode and try again', 'message' => 'Not Found'];
+                return response()->json($response,404);
+            }
+            else{
+                $response =['status' => 'success', 'locations' => $location];
+                return response()->json($response,200);
+            }
+    }
+
 
 
     /**

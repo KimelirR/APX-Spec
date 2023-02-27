@@ -6,6 +6,9 @@ import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min';
 
+import 'bootstrap-icons/bootstrap-icons.svg';
+
+
 import Index from './components/Index';
 import NotFound from './components/NotFound';
 
